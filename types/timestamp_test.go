@@ -150,3 +150,15 @@ func TestTimestampNow(t *testing.T) {
 		t.Errorf("between %v and %v\nTimestamp(TimestampNow()) = %v", before, after, tm)
 	}
 }
+
+func TestAsTime(t *testing.T) {
+	tn := time.Now()
+	ts, err := TimestampProto(tn)
+	if err != nil {
+		t.Fatalf("TestAsTime failed: %v", err)
+	}
+	at := ts.AsTime()
+	if !at.Equal(tn) {
+		t.Errorf("AsTime() = %v, want %v", at, tn)
+	}
+}

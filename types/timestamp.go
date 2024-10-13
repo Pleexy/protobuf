@@ -128,3 +128,8 @@ func TimestampString(ts *Timestamp) string {
 	}
 	return t.Format(time.RFC3339Nano)
 }
+
+// AsTime converts x to a time.Time.
+func (x *Timestamp) AsTime() time.Time {
+	return time.Unix(int64(x.GetSeconds()), int64(x.GetNanos())).UTC()
+}
